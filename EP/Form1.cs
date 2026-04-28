@@ -8,11 +8,11 @@ namespace EP
 {
     public partial class Form1 : Form
     {
+        Random random = new Random();
         List<BaseObject> objects = new();
         Player player;
         Marker marker;
         Enemy enemy;
-        Random random = new Random();
         public Form1()
         {
             InitializeComponent();
