@@ -8,6 +8,7 @@ namespace EP
 {
     public partial class Form1 : Form
     {
+        //test
         Random random = new Random();
         List<BaseObject> objects = new();
         Player player;
