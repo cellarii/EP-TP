@@ -10,7 +10,6 @@ namespace EP
         List<BaseObject> objects = new();
         Player player;
         Marker marker;
-        Enemy enemy;
         Random random = new Random();
         int bonusCount = 0;
         public Form1()
@@ -29,17 +28,12 @@ namespace EP
             player.OnEnemyOverlap += (en) =>
             {
                 objects.Remove(en);
-                enemy = null;
                 bonusCount += 1;
                 txtBonus.Text = "Очки: " + bonusCount;
-                var newX = random.Next(50, pbMain.Width - 50);
-                var newY = random.Next(50, pbMain.Height - 50);
-                objects.Add(new Enemy(newX, newY, 0));
+                createEnemy();
             };
-            enemy = new Enemy(random.Next(15, pbMain.Width - 16), random.Next(15, pbMain.Height - 16), 0);
-            objects.Add(enemy);
-            enemy = new Enemy(random.Next(15, pbMain.Width - 16), random.Next(15, pbMain.Height - 16), 0);
-            objects.Add(enemy);
+            createEnemy();
+            createEnemy();
             objects.Add(player);
             txtBonus.Text = "Очки: " + bonusCount;
         }
@@ -50,6 +44,10 @@ namespace EP
             g.Clear(Color.White);
 
             updatePlayer();
+            foreach(var en in objects.OfType<Enemy>())
+            {
+                en.ReduceSize();
+            }
 
             foreach (var obj in objects.ToList())
             {
@@ -106,6 +104,21 @@ namespace EP
             }
             marker.X = e.X;
             marker.Y = e.Y;
+        }
+
+        public void createEnemy()
+        {
+            var enemy = new Enemy(random.Next(15, pbMain.Width - 16), random.Next(15, pbMain.Height - 16), 0);
+            enemy.EnemyDisappeared += (en) =>
+            {
+                var x = random.Next(50, pbMain.Width - 50);
+                var y = random.Next(50, pbMain.Height - 50);
+                en.respawn(x, y);
+                bonusCount -= 1;
+                txtBonus.Text = "Очки: " + bonusCount;
+                txtLog.Text = $"[{DateTime.Now:HH:mm:ss:ff}] Враг исчез" + txtLog.Text;
+            };
+            objects.Add(enemy);
         }
     }
 }

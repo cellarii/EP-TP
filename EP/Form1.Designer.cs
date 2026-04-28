@@ -40,7 +40,7 @@
             // 
             pbMain.Location = new Point(30, 42);
             pbMain.Name = "pbMain";
-            pbMain.Size = new Size(566, 366);
+            pbMain.Size = new Size(514, 366);
             pbMain.TabIndex = 0;
             pbMain.TabStop = false;
             pbMain.Paint += pbMain_Paint;
@@ -48,9 +48,9 @@
             // 
             // txtLog
             // 
-            txtLog.Location = new Point(602, 42);
+            txtLog.Location = new Point(550, 42);
             txtLog.Name = "txtLog";
-            txtLog.Size = new Size(162, 366);
+            txtLog.Size = new Size(214, 366);
             txtLog.TabIndex = 1;
             txtLog.Text = "";
             // 
@@ -63,7 +63,7 @@
             // txtBonus
             // 
             txtBonus.AutoSize = true;
-            txtBonus.Location = new Point(509, 62);
+            txtBonus.Location = new Point(446, 62);
             txtBonus.Name = "txtBonus";
             txtBonus.Size = new Size(59, 25);
             txtBonus.TabIndex = 2;
