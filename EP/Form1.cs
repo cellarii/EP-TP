@@ -1,19 +1,18 @@
 using EP.Objects;
-using System;
+using EP.Objects;
 using System.DirectoryServices.ActiveDirectory;
 using System.Net.Http.Headers;
-using System.Numerics;
 
 namespace EP
 {
     public partial class Form1 : Form
     {
-        //test
-        Random random = new Random();
         List<BaseObject> objects = new();
         Player player;
         Marker marker;
         Enemy enemy;
+        Random random = new Random();
+        int bonusCount = 0;
         public Form1()
         {
             InitializeComponent();
@@ -31,13 +30,18 @@ namespace EP
             {
                 objects.Remove(en);
                 enemy = null;
+                bonusCount += 1;
+                txtBonus.Text = "Очки: " + bonusCount;
                 var newX = random.Next(50, pbMain.Width - 50);
                 var newY = random.Next(50, pbMain.Height - 50);
                 objects.Add(new Enemy(newX, newY, 0));
             };
-            enemy = new Enemy(random.Next(50, pbMain.Width - 50), random.Next(50, pbMain.Height - 50), 0);
+            enemy = new Enemy(random.Next(15, pbMain.Width - 16), random.Next(15, pbMain.Height - 16), 0);
+            objects.Add(enemy);
+            enemy = new Enemy(random.Next(15, pbMain.Width - 16), random.Next(15, pbMain.Height - 16), 0);
             objects.Add(enemy);
             objects.Add(player);
+            txtBonus.Text = "Очки: " + bonusCount;
         }
 
         private void pbMain_Paint(object sender, PaintEventArgs e)
