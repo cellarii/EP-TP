@@ -11,7 +11,7 @@ namespace EP.Objects
     internal class Enemy : BaseObject
     {
         public float currentRadius;
-        public float speed = 0.2f;
+        public float speed = 0.15f;
         Random random = new Random();
         public Action<Enemy> EnemyDisappeared;
 
@@ -22,7 +22,9 @@ namespace EP.Objects
 
         public override void Render(Graphics g)
         {
-            g.FillEllipse(new SolidBrush(Color.Pink), -currentRadius, -currentRadius, currentRadius*2, currentRadius*2);
+            ReduceSize();
+            g.FillEllipse(new SolidBrush(Color.BlueViolet), -currentRadius, -currentRadius, currentRadius*2, currentRadius*2);
+
         }
 
         public override GraphicsPath getGraphicsPath()
@@ -39,13 +41,6 @@ namespace EP.Objects
             {
                 EnemyDisappeared(this);
             }
-        }
-
-        public void respawn(int x, int y)
-        {
-            this.X = x;
-            this.Y = y;
-            currentRadius = random.Next(10, 23);
         }
     }
 }

@@ -40,7 +40,7 @@
             // 
             pbMain.Location = new Point(30, 42);
             pbMain.Name = "pbMain";
-            pbMain.Size = new Size(514, 366);
+            pbMain.Size = new Size(514, 241);
             pbMain.TabIndex = 0;
             pbMain.TabStop = false;
             pbMain.Paint += pbMain_Paint;
@@ -50,7 +50,7 @@
             // 
             txtLog.Location = new Point(550, 42);
             txtLog.Name = "txtLog";
-            txtLog.Size = new Size(214, 366);
+            txtLog.Size = new Size(214, 241);
             txtLog.TabIndex = 1;
             txtLog.Text = "";
             // 
@@ -73,7 +73,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 322);
             Controls.Add(txtBonus);
             Controls.Add(txtLog);
             Controls.Add(pbMain);

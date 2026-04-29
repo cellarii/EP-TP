@@ -30,10 +30,10 @@ namespace EP
                 objects.Remove(en);
                 bonusCount += 1;
                 txtBonus.Text = "Очки: " + bonusCount;
-                createEnemy();
+                createEnemyDescription();
             };
-            createEnemy();
-            createEnemy();
+            createEnemyDescription();
+            createEnemyDescription();
             objects.Add(player);
             txtBonus.Text = "Очки: " + bonusCount;
         }
@@ -44,10 +44,6 @@ namespace EP
             g.Clear(Color.White);
 
             updatePlayer();
-            foreach(var en in objects.OfType<Enemy>())
-            {
-                en.ReduceSize();
-            }
 
             foreach (var obj in objects.ToList())
             {
@@ -58,7 +54,7 @@ namespace EP
                 }
             }
 
-            foreach (var obj in objects)
+            foreach (var obj in objects.ToList())
             {
                 g.Transform = obj.getTransform();
                 obj.Render(g);
@@ -106,14 +102,17 @@ namespace EP
             marker.Y = e.Y;
         }
 
-        public void createEnemy()
+        
+
+        public void createEnemyDescription()
         {
-            var enemy = new Enemy(random.Next(15, pbMain.Width - 16), random.Next(15, pbMain.Height - 16), 0);
+            var x = random.Next(50, pbMain.Width - 50);
+            var y = random.Next(50, pbMain.Height - 50);
+            var enemy = new Enemy(x, y, 0);
             enemy.EnemyDisappeared += (en) =>
             {
-                var x = random.Next(50, pbMain.Width - 50);
-                var y = random.Next(50, pbMain.Height - 50);
-                en.respawn(x, y);
+                objects.Remove(en);
+                createEnemyDescription();
                 bonusCount -= 1;
                 txtBonus.Text = "Очки: " + bonusCount;
                 txtLog.Text = $"[{DateTime.Now:HH:mm:ss:ff}] Враг исчез" + txtLog.Text;
